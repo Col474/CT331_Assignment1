@@ -7,7 +7,22 @@ typedef struct listElementStruct{
   char* data;
   size_t size;
   struct listElementStruct* next;
+  struct listElementSructt*after;
 } listElement;
+
+
+struct Queue 
+{ 
+    struct QNode *front, *rear; 
+}; 
+
+
+struct Queue *createQueue() 
+{ 
+    struct Queue *q = (struct Queue*)malloc(sizeof(struct Queue)); 
+    q->front = q->rear = NULL; 
+    return q; 
+} 
 
 //Creates a new linked list element with given content of size
 //Returns a pointer to the element
@@ -59,3 +74,59 @@ void deleteAfter(listElement* after){
   free(delete->data);
   free(delete);
 }
+
+int length(listElement* list) 
+{ 
+int count = 0;
+listElement* current = list;
+  while(current != NULL){
+    count = count++;
+    current = current->next;
+  }
+  return count;
+} 
+
+void push(listElement** list, char* data, size_t size)
+{
+	listElement*temp = createEl(data,size);
+	temp->next = *list;
+	*list = temp;
+}
+
+listElement*pop(listElement**list)
+{
+   listElement*temp = *list;
+   if(temp){
+	   *list = temp->next;
+   }
+   return temp;
+}
+
+void enQueue(struct Queue *q, char*data, size_t size) 
+{ 
+    listElement*temp = createEl(data,size);
+	
+    if (q->rear == NULL) 
+    { 
+       q->front = q->rear = temp; 
+       return; 
+    } 
+  
+    q->rear->next = temp; 
+    q->rear = temp; 
+} 
+  
+
+listElement*deQueue(struct Queue *q) 
+{ 
+
+    if (q->front == NULL) 
+       return NULL; 
+  
+    listElement*temp = q->front; 
+    q->front = q->front->next; 
+  
+    if (q->front == NULL) 
+       q->rear = NULL; 
+    return temp; 
+} 

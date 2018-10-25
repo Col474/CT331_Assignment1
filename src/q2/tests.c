@@ -2,6 +2,7 @@
 #include "tests.h"
 #include "linkedList.h"
 
+
 void runTests(){
   printf("Tests running...\n");
   listElement* l = createEl("Test String (1).", 30);
@@ -20,6 +21,8 @@ void runTests(){
   deleteAfter(l);
   traverse(l);
   printf("\n");
-
+  
+  
+  
   printf("\nTests complete.\n");
 }
